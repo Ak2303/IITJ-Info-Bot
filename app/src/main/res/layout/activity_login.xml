@@ -4,36 +4,35 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".LoginActivity"
+    android:background="@color/blue_light"
     android:gravity="center"
-    android:background="@color/blue_light">
+    tools:context=".LoginActivity">
 
     <ImageView
         android:id="@+id/launch_logo"
         android:layout_width="220dp"
         android:layout_height="220dp"
-        android:src="@drawable/logo_with_name"
         android:layout_centerHorizontal="true"
-        android:layout_margin="18dp"/>
+        android:layout_margin="18dp"
+        android:src="@drawable/logo_with_name" />
 
     <TextView
         android:id="@+id/sign_in_text"
-        android:layout_below="@id/launch_logo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign In to Continue"
+        android:layout_below="@id/launch_logo"
         android:layout_centerHorizontal="true"
-        android:textSize="18dp"
+        android:text="Sign In to Continue"
         android:textColor="@color/black"
-        />
+        android:textSize="18dp" />
 
     <com.google.android.gms.common.SignInButton
         android:id="@+id/sign_in_button"
-        android:layout_below="@+id/sign_in_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/sign_in_text"
         android:layout_centerHorizontal="true"
         android:layout_margin="18dp"
-        app:buttonSize="wide"/>
+        app:buttonSize="wide" />
 
 </RelativeLayout>

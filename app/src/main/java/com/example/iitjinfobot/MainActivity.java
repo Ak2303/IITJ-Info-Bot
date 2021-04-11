@@ -20,7 +20,7 @@ import com.google.android.gms.tasks.Task;
 public class MainActivity extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
-    
+
     private TextView userInfo;
     private Button signOut;
 
@@ -32,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestEmail()
                 .build();
-        
+
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
         String personName = getIntent().getExtras().get("name").toString();
@@ -59,15 +59,14 @@ public class MainActivity extends AppCompatActivity {
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
                             public void onComplete(@NonNull Task<Void> task) {
-                                if(task.isSuccessful()){
+                                if (task.isSuccessful()) {
                                     Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
                                     loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(loginIntent);
                                     finish();
-                                }
-                                else{
+                                } else {
                                     String error = task.getException().getMessage();
-                                    Toast.makeText(MainActivity.this, "Error: "+error, Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
                                 }
                             }
                         });
