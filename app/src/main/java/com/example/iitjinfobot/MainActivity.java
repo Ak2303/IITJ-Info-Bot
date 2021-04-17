@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     GoogleSignInClient mGoogleSignInClient;
 
-    private TextView userInfo;
+    private TextView helloUser;
     private Button signOut;
 
     @Override
@@ -38,23 +38,19 @@ public class MainActivity extends AppCompatActivity {
 
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
-        userInfo = findViewById(R.id.user_info);
+        helloUser = findViewById(R.id.user_hello);
         signOut = findViewById(R.id.sign_out);
 
         if (acct != null) {
-            String personName = acct.getDisplayName();
+//            String personName = acct.getDisplayName();
             String personGivenName = acct.getGivenName();
-            String personFamilyName = acct.getFamilyName();
-            String personEmail = acct.getEmail();
-            String personId = acct.getId();
+//            String personFamilyName = acct.getFamilyName();
+//            String personEmail = acct.getEmail();
+//            String personId = acct.getId();
 
-            userInfo.setText(
-                    "Name: " + personName + "\n" +
-                            "Given name: " + personGivenName + "\n" +
-                            "Family name: " + personFamilyName + "\n" +
-                            "Email: " + personEmail + "\n" +
-                            "Id: " + personId
-            );
+            String greetingText = helloUser.getText().toString();
+            greetingText += " Hello\n" + personGivenName;
+            helloUser.setText(greetingText);
         } else {
             Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
             loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
