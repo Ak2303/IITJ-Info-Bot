@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -35,22 +36,32 @@ public class MainActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        String personName = getIntent().getExtras().get("name").toString();
-        String personGivenName = getIntent().getExtras().get("given_name").toString();
-        String personFamilyName = getIntent().getExtras().get("family_name").toString();
-        String personEmail = getIntent().getExtras().get("email").toString();
-        String personId = getIntent().getExtras().get("id").toString();
+        GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
         userInfo = findViewById(R.id.user_info);
         signOut = findViewById(R.id.sign_out);
 
-        userInfo.setText(
-                "Name: " + personName + "\n" +
-                        "Given name: " + personGivenName + "\n" +
-                        "Family name: " + personFamilyName + "\n" +
-                        "Email: " + personEmail + "\n" +
-                        "Id: " + personId
-        );
+        if (acct != null) {
+            String personName = acct.getDisplayName();
+            String personGivenName = acct.getGivenName();
+            String personFamilyName = acct.getFamilyName();
+            String personEmail = acct.getEmail();
+            String personId = acct.getId();
+
+            userInfo.setText(
+                    "Name: " + personName + "\n" +
+                            "Given name: " + personGivenName + "\n" +
+                            "Family name: " + personFamilyName + "\n" +
+                            "Email: " + personEmail + "\n" +
+                            "Id: " + personId
+            );
+        } else {
+            Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+            loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(loginIntent);
+            finish();
+        }
+
 
         signOut.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -75,18 +75,7 @@ public class LoginActivity extends AppCompatActivity {
 
             GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
             if (acct != null) {
-                String personName = acct.getDisplayName();
-                String personGivenName = acct.getGivenName();
-                String personFamilyName = acct.getFamilyName();
-                String personEmail = acct.getEmail();
-                String personId = acct.getId();
-
                 Intent mainIntent = new Intent(LoginActivity.this, MainActivity.class);
-                mainIntent.putExtra("name", personName);
-                mainIntent.putExtra("given_name", personGivenName);
-                mainIntent.putExtra("family_name", personFamilyName);
-                mainIntent.putExtra("email", personEmail);
-                mainIntent.putExtra("id", personId);
                 mainIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                 startActivity(mainIntent);
                 finish();
