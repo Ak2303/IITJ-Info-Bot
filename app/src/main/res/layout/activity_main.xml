@@ -10,16 +10,13 @@
     <TextView
         android:id="@+id/user_hello"
         android:layout_width="match_parent"
-        android:layout_height="180dp"
+        android:layout_height="wrap_content"
         android:background="@drawable/chat_top"
         android:gravity="center"
         android:text="👋"
         android:textColor="@color/white"
-        android:textSize="40dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:textSize="36dp"
+        android:padding="18dp" />
 
     <Button
         android:id="@+id/sign_out"
