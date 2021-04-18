@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -23,7 +25,6 @@ public class MainActivity extends AppCompatActivity {
     GoogleSignInClient mGoogleSignInClient;
 
     private TextView helloUser;
-    private Button signOut;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +40,6 @@ public class MainActivity extends AppCompatActivity {
         GoogleSignInAccount acct = GoogleSignIn.getLastSignedInAccount(this);
 
         helloUser = findViewById(R.id.user_hello);
-        signOut = findViewById(R.id.sign_out);
 
         if (acct != null) {
 //            String personName = acct.getDisplayName();
@@ -57,27 +57,40 @@ public class MainActivity extends AppCompatActivity {
             startActivity(loginIntent);
             finish();
         }
+    }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        super.onCreateOptionsMenu(menu);
+        getMenuInflater().inflate(R.menu.side_menu, menu);
 
-        signOut.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mGoogleSignInClient.signOut()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
-                                    loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                                    startActivity(loginIntent);
-                                    finish();
-                                } else {
-                                    String error = task.getException().getMessage();
-                                    Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
-                                }
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.dev_info) {
+            Intent developerIntent = new Intent(MainActivity.this, DeveloperInfoActivity.class);
+            startActivity(developerIntent);
+        }
+        if (item.getItemId() == R.id.signout) {
+            mGoogleSignInClient.signOut()
+                    .addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull Task<Void> task) {
+                            if (task.isSuccessful()) {
+                                Intent loginIntent = new Intent(MainActivity.this, LoginActivity.class);
+                                loginIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                startActivity(loginIntent);
+                                finish();
+                            } else {
+                                String error = task.getException().getMessage();
+                                Toast.makeText(MainActivity.this, "Error: " + error, Toast.LENGTH_SHORT).show();
                             }
-                        });
-            }
-        });
+                        }
+                    });
+        }
+
+        return true;
     }
 }

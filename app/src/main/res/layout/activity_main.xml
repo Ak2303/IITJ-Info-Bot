@@ -18,12 +18,4 @@
         android:textSize="36dp"
         android:padding="18dp" />
 
-    <Button
-        android:id="@+id/sign_out"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:text="Sign Out" />
-
 </RelativeLayout>
