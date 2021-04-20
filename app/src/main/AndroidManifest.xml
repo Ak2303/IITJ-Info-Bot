@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.IITJInfoBot">
-        <activity android:name=".DeveloperInfoActivity"></activity>
+        <activity android:name=".ChatWindowActivity"></activity>
+        <activity android:name=".DeveloperInfoActivity" />
         <activity android:name=".LoginActivity" />
         <activity android:name=".MainActivity">
             <intent-filter>
